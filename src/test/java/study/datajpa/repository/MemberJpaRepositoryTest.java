@@ -75,6 +75,6 @@ class MemberJpaRepositoryTest {
 
         Member updateMember = memberJpaRepository.findById(findMember3.getId()).get();
         assertThat(updateMember.getUsername()).isEqualTo("update");
-        
+
     }
 }
