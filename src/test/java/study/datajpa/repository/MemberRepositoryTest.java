@@ -34,7 +34,7 @@ class MemberRepositoryTest {
         assertThat(findMember.getUsername()).isEqualTo(member.getUsername());
         assertThat(findMember).isEqualTo(member);
     }
-    
+
     @Test
     public void test2() throws Exception {
         System.out.println("memberRepository.getClass() = " + memberRepository.getClass());
