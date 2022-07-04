@@ -27,7 +27,7 @@ public class Member {
     private Long id;
     private String username;
     private int age;
-    @ManyToOne(fetch = LAZY)
+    @ManyToOne(fetch = LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "team_id")
     private Team team;
 
