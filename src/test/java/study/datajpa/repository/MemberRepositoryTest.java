@@ -229,7 +229,7 @@ class MemberRepositoryTest {
     }
 
     @Test
-    void test12() throws Exception{
+    void test12() throws Exception {
         // given
         memberRepository.save(new Member("member1", 10));
         memberRepository.save(new Member("member2", 11));
@@ -249,6 +249,44 @@ class MemberRepositoryTest {
 
         // then
         assertThat(resultCount).isEqualTo(3);
+
+    }
+
+    @Test
+    @DisplayName("Problem of N + 1, then resolve using by fetch join & @EntityGraph")
+    public void test13() throws Exception {
+        // given
+        Team teamA = new Team("teamA");
+        Team teamB = new Team("teamB");
+        teamRepository.save(teamA);
+        teamRepository.save(teamB);
+
+        Member member1 = new Member("member1", 10, teamA);
+        Member member2 = new Member("member2", 20, teamB);
+        memberRepository.save(member1);
+        memberRepository.save(member2);
+
+        em.flush();
+        em.clear();
+
+        // when N + 1
+        // select Member 1
+        List<Member> members = memberRepository.findAll();
+
+        for (Member member : members) {
+            System.out.println("member.getUsername() = " + member.getUsername());
+            System.out.println("member.getTeam().getClass() = " + member.getTeam().getClass());
+            System.out.println("member.getTeam().getName() = " + member.getTeam().getName());
+        }
+
+        List<Member> fetchJoinMembers = memberRepository.findMemberFetchJoin();
+
+        for (Member member : fetchJoinMembers) {
+            System.out.println("member.getUsername() = " + member.getUsername());
+            System.out.println("member.getTeam().getClass() = " + member.getTeam().getClass());
+            System.out.println("member.getTeam().getName() = " + member.getTeam().getName());
+        }
+        //then
 
     }
 
