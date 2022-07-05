@@ -134,5 +134,22 @@ class MemberJpaRepositoryTest {
 
     }
 
+    @Test
+    void test6() throws Exception{
+        // given
+        memberJpaRepository.save(new Member("member1", 10));
+        memberJpaRepository.save(new Member("member2", 11));
+        memberJpaRepository.save(new Member("member3", 12));
+        memberJpaRepository.save(new Member("member4", 13));
+        memberJpaRepository.save(new Member("member5", 14));
+
+        // when
+        int resultCount = memberJpaRepository.bulkAgePlus(12);
+
+        // then
+        assertThat(resultCount).isEqualTo(3);
+
+    }
+
 
 }
