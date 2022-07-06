@@ -290,4 +290,46 @@ class MemberRepositoryTest {
 
     }
 
+    @Test
+    @DisplayName("Query hint")
+    public void test14() throws Exception {
+        // given
+        Member member1 = new Member("member1", 10);
+        memberRepository.save(member1);
+        em.flush();
+        em.clear();
+
+        // when
+        Member readOnlyMember = memberRepository.findReadOnlyByUsername("member1");
+        readOnlyMember.setUsername("member2");
+        em.flush();
+
+        System.out.println("member1 = " + member1);
+        System.out.println("readOnlyMember = " + readOnlyMember);
+
+        System.out.println("===============================");
+//        Member findMember = memberRepository.findById(member1.getId()).get();
+//        findMember.setUsername("member2");
+//        em.flush();
+//
+//        System.out.println("member1 = " + member1);
+//        System.out.println("findMember = " + findMember);
+
+    }
+
+    @Test
+    @DisplayName("Lock")
+    public void test15() throws Exception {
+        // given
+        Member member1 = new Member("member1", 10);
+        memberRepository.save(member1);
+        em.flush();
+        em.clear();
+
+        // when
+        List<Member> result = memberRepository.findLockByUsername("member1");
+
+        //then
+    }
+
 }
