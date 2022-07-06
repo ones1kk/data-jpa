@@ -7,6 +7,7 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import java.time.LocalDateTime;
+
 @Getter
 @MappedSuperclass
 public class JpaBaseEntity {
@@ -17,7 +18,7 @@ public class JpaBaseEntity {
 
     @PrePersist
     public void prePersist() {
-        LocalDateTime now= LocalDateTime.now();
+        LocalDateTime now = LocalDateTime.now();
         createdDatetime = now;
         updatedDatetime = now;
     }

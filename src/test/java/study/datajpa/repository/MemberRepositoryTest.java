@@ -332,4 +332,13 @@ class MemberRepositoryTest {
         //then
     }
 
+    @Test
+    public void test16() throws Exception {
+        // given
+
+        // when
+
+        //then
+    }
+
 }

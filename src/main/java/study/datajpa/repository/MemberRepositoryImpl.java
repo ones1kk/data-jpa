@@ -7,7 +7,7 @@ import javax.persistence.EntityManager;
 import java.util.List;
 
 @RequiredArgsConstructor
-public class MemberRepositoryImpl implements CustomMemberRepository{
+public class MemberRepositoryImpl implements CustomMemberRepository {
 
     private final EntityManager em;
 

@@ -26,7 +26,7 @@ public class MemberController {
 
     // Not Recommended
     @GetMapping("v2/{id}")
-    String findMember2(@PathVariable Member member) {
+    String findMember2(@PathVariable("id") Member member) {
         return member.getUsername();
     }
 
