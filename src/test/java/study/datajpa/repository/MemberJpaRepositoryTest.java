@@ -135,7 +135,7 @@ class MemberJpaRepositoryTest {
     }
 
     @Test
-    void test6() throws Exception{
+    void test6() throws Exception {
         // given
         memberJpaRepository.save(new Member("member1", 10));
         memberJpaRepository.save(new Member("member2", 11));
