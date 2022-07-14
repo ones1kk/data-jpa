@@ -1,5 +1,6 @@
 package study.datajpa.repository;
 
+import org.apache.catalina.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.*;
@@ -14,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface MemberRepository extends JpaRepository<Member, Long>, CustomMemberRepository {
+public interface MemberRepository extends JpaRepository<Member, Long>, CustomMemberRepository, JpaSpecificationExecutor<Member> {
 
     List<Member> findByUsernameAndAgeGreaterThan(String username, int age);
 
@@ -69,5 +70,11 @@ public interface MemberRepository extends JpaRepository<Member, Long>, CustomMem
 
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     List<Member> findLockByUsername(String username);
+
+    List<UsernameOnly> findProjectionsV1ByUsername(@Param("username") String username);
+
+    List<UsernameOnlyDto> findProjectionsV2ByUsername(@Param("username") String username);
+
+    <T> List<T> findProjectionsV3ByUsername(@Param("username") String username, Class<T> type);
 
 }
